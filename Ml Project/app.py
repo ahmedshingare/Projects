@@ -15,7 +15,7 @@ def fetch_poster(movie_id):
         return "https://via.placeholder.com/500x750?text=No+Poster"
 
 # ---------- Recommendation logic ----------
-def recommend(movie):
+def recommend(movie, n):
     index = movies[movies['title'] == movie].index[0]
     distances = sorted(
         list(enumerate(similarity[index])),
@@ -26,7 +26,7 @@ def recommend(movie):
     recommended_movie_names = []
     recommended_movie_posters = []
 
-    for i in distances[1:6]:
+    for i in distances[1:n+1]:
         movie_id = movies.iloc[i[0]]["movie_id"]  # safer
         recommended_movie_posters.append(fetch_poster(movie_id))
         recommended_movie_names.append(movies.iloc[i[0]]["title"])
@@ -49,12 +49,22 @@ selected_movie = st.selectbox(
     movie_list
 )
 
+# ---------- Slider ----------
+num_recommendations = st.slider(
+    "Number of recommendations",
+    min_value=3,
+    max_value=10,
+    value=5
+)
+
 # ---------- Button with Spinner ----------
 if st.button("Show Recommendation"):
     with st.spinner("Finding similar movies for you... 🎬"):
-        recommended_movie_names, recommended_movie_posters = recommend(selected_movie)
+        recommended_movie_names, recommended_movie_posters = recommend(
+            selected_movie, num_recommendations
+        )
 
-    cols = st.columns(5)
+    cols = st.columns(num_recommendations)
     for col, name, poster in zip(cols, recommended_movie_names, recommended_movie_posters):
         with col:
             st.image(poster)
