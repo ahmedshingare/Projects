@@ -40,4 +40,38 @@ st.sidebar.title("🎥 Movie Recommender")
 st.sidebar.write("Get movie recommendations using ML similarity")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-movies = pickle.load(open(os.
+movies = pickle.load(open(os.path.join(BASE_DIR, "movie_list.pkl"), "rb"))
+similarity = pickle.load(open(os.path.join(BASE_DIR, "similarity.pkl"), "rb"))
+
+movie_list = movies["title"].values
+
+selected_movie = st.sidebar.selectbox(
+    "🎬 Select a movie",
+    movie_list
+)
+
+num_recommendations = st.sidebar.slider(
+    "🎯 Number of recommendations",
+    min_value=3,
+    max_value=10,
+    value=5
+)
+
+show_btn = st.sidebar.button("🔍 Show Recommendation")
+
+# ---------- Main Page ----------
+st.title("🎬 Recommended Movies")
+
+if show_btn:
+    with st.spinner("Finding similar movies for you... 🎬"):
+        recommended_movie_names, recommended_movie_posters = recommend(
+            selected_movie, num_recommendations
+        )
+
+    cols = st.columns(num_recommendations)
+    for col, name, poster in zip(cols, recommended_movie_names, recommended_movie_posters):
+        with col:
+            st.image(poster)
+            st.caption(name)
+else:
+    st.info("👈 Select a movie and click **Show Recommendation** from the sidebar")
