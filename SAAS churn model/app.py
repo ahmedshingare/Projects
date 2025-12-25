@@ -16,11 +16,11 @@ with open("SAAS churn model/xgb_model.pkl", "rb") as f:
     model = pickle.load(f)
 
 # Load SHAP explainer
-with open("shap_explainer.pkl", "rb") as f:
+with open("SAAS churn model/shap_explainer.pkl", "rb") as f:
     explainer = pickle.load(f)
 
 # Load feature columns
-with open("feature_columns.pkl", "rb") as f:
+with open("SAAS churn model/feature_columns.pkl", "rb") as f:
     feature_cols = pickle.load(f)
 
 st.title("📉 SaaS Customer Churn Prediction with XAI")
