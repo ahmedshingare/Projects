@@ -2,8 +2,9 @@ shap
 numpy==1.26.4
 scikit-learn
 matplotlib
-streamlit==1.31.1
-pandas==2.0.3
-xgboost==1.7.6
-llvmlite==0.39.1
+streamlit
+pandas
+xgboost
+llvmlite
+
 
