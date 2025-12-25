@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="SaaS Churn Prediction", layout="wide")
 
 # Load model
-with open("xgb_model.pkl", "rb") as f:
+with open("SAAS churn model/xgb_model.pkl", "rb") as f:
     model = pickle.load(f)
 
 # Load SHAP explainer
