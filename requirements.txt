@@ -1,11 +1,9 @@
+shap
+numpy==1.26.4
+scikit-learn
+matplotlib
 streamlit==1.31.1
 pandas==2.0.3
-numpy==1.23.5
-scikit-learn==1.3.2
 xgboost==1.7.6
-shap==0.44.1
-matplotlib==3.7.2
 numba==0.56.4
 llvmlite==0.39.1
-
-
