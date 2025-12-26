@@ -1,6 +1,6 @@
 # ================================
-# SaaS Churn Prediction (Streamlit)
-# Business-Friendly UI
+# SaaS Customer Churn Prediction
+# Business-Friendly Streamlit App
 # ================================
 
 import streamlit as st
@@ -11,16 +11,16 @@ import shap
 import matplotlib.pyplot as plt
 
 # -------------------------------
-# Page Config
+# Page Configuration
 # -------------------------------
 st.set_page_config(
-    page_title="SaaS Customer Churn Risk",
+    page_title="SaaS Churn Risk Dashboard",
     page_icon="📉",
     layout="wide"
 )
 
 # -------------------------------
-# Load Artifacts
+# Load Model Artifacts (Cached)
 # -------------------------------
 @st.cache_resource
 def load_artifacts():
@@ -39,18 +39,18 @@ def load_artifacts():
 model, explainer, feature_cols = load_artifacts()
 
 # -------------------------------
-# App Title
+# App Header
 # -------------------------------
 st.title("📉 SaaS Customer Churn Risk Dashboard")
 st.markdown(
     """
-    This tool helps **business teams** identify customers at risk of leaving  
-    and understand **why**, so timely retention actions can be taken.
+    This application helps **business teams** identify customers who may stop using the product  
+    and understand **why**, so proactive retention actions can be taken.
     """
 )
 
 # -------------------------------
-# Sidebar Inputs (Business-Friendly)
+# Sidebar Inputs (Non-Technical)
 # -------------------------------
 st.sidebar.title("🧾 Customer Information")
 
@@ -58,13 +58,13 @@ with st.sidebar.expander("📊 Product Usage", expanded=True):
     days_since_last_usage = st.slider(
         "Days since last product usage",
         0, 180, 14,
-        help="Number of days since the customer last used the product"
+        help="How many days have passed since the customer last used the product"
     )
 
     usage_ratio_30_90 = st.slider(
         "Recent activity compared to past activity",
         0.0, 1.0, 0.6,
-        help="Lower values indicate a recent decline in usage"
+        help="Lower values indicate a decline in recent usage"
     )
 
 with st.sidebar.expander("📆 Subscription Details", expanded=True):
@@ -80,13 +80,13 @@ with st.sidebar.expander("🎧 Support Experience", expanded=True):
     avg_first_response_time = st.slider(
         "Average support response time (minutes)",
         1, 300, 45,
-        help="Time taken by support team to respond initially"
+        help="Time taken by the support team to respond initially"
     )
 
     escalation_rate = st.slider(
         "How often issues are escalated",
         0.0, 1.0, 0.1,
-        help="Higher values mean more unresolved issues"
+        help="Higher values mean more unresolved support issues"
     )
 
     avg_satisfaction_score = st.slider(
@@ -117,30 +117,37 @@ st.divider()
 st.subheader("📌 Churn Risk Assessment")
 
 if st.button("🔍 Analyze Churn Risk"):
-    churn_prob = model.predict_proba(input_data)[0][1]
 
-    # Risk Segmentation
+    # Predict probability
+    churn_prob = model.predict_proba(input_data)[0][1]
+    churn_prob = float(churn_prob)  # 🔧 FIX: numpy → python float
+
+    # Risk segmentation
     if churn_prob >= 0.50:
         risk_level = "HIGH"
         st.error("🚨 HIGH RISK OF CHURN")
-        recommendation = "Immediate retention action required (personal outreach, offer, or support call)."
+        recommendation = (
+            "Immediate retention action required "
+            "(personal outreach, discount, or support call)."
+        )
     elif churn_prob >= 0.30:
         risk_level = "MEDIUM"
         st.warning("⚠️ MEDIUM RISK OF CHURN")
-        recommendation = "Monitor closely and consider proactive engagement."
+        recommendation = (
+            "Monitor closely and consider proactive engagement."
+        )
     else:
         risk_level = "LOW"
         st.success("✅ LOW RISK OF CHURN")
         recommendation = "No immediate action required."
 
-    # Metrics Display
+    # Display metrics
     col1, col2, col3 = st.columns(3)
     col1.metric("Churn Probability", f"{churn_prob:.0%}")
     col2.metric("Risk Level", risk_level)
-    col3.metric("Recommended Action", "See below")
+    col3.metric("Action Needed", "See below")
 
     st.progress(min(churn_prob, 1.0))
-
     st.markdown(f"**Recommended Action:** {recommendation}")
 
     # -------------------------------
@@ -148,7 +155,9 @@ if st.button("🔍 Analyze Churn Risk"):
     # -------------------------------
     st.divider()
     st.subheader("🔍 Why is this customer at risk?")
-    st.caption("The chart below shows the main factors influencing this prediction.")
+    st.caption(
+        "The chart below shows the main factors influencing this prediction."
+    )
 
     try:
         shap_values = explainer.shap_values(input_data)
@@ -176,12 +185,15 @@ if st.button("🔍 Analyze Churn Risk"):
         )
 
     except Exception:
-        st.warning("Explanation temporarily unavailable.")
+        st.warning(
+            "Explanation temporarily unavailable due to platform limitations."
+        )
 
 # -------------------------------
 # Footer
 # -------------------------------
 st.divider()
 st.caption(
-    "Built using Machine Learning & Explainable AI to support data-driven retention decisions."
+    "Built using Machine Learning and Explainable AI to support data-driven "
+    "customer retention decisions."
 )
