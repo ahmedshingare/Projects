@@ -17,6 +17,29 @@ Which customers are most likely to churn, and why?
 # Dataset Description
 A fully synthetic but realistic SaaS dataset was used, designed to mirror real production systems.
 
+# Feature Engineering
+Features were engineered across four core dimensions:
+🔹 Lifecycle
+Subscription age
+Trial status
+Upgrade / downgrade indicators
+
+🔹 Usage Behavior (Most Important)
+Usage in last 30 days (usage_30d)
+Usage in last 90 days (usage_90d)
+Usage decline ratio (usage_ratio_30_90)
+Days since last usage
+
+🔹 Support Quality
+Average first response time
+Escalation rate
+Customer satisfaction score
+Missing satisfaction indicator
+
+🔹 Revenue
+MRR, ARR
+MRR per seat
+
 # Model Selection
 Baseline : Logistic Regression (for interpretability and validation)
 Final Model : XGBoost Classifier
