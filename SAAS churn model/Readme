@@ -1,0 +1,76 @@
+# Link
+https://saaschurn.streamlit.app/
+
+# Project Overview
+Customer churn is one of the biggest challenges for SaaS businesses.
+This project builds an end-to-end machine learning system to predict customer churn, prioritize high-risk customers, and explain predictions using XAI (SHAP).
+The solution focuses on business usability, not just model accuracy, by using Top-K risk targeting and explainable insights to support retention decisions.
+
+# Business Problem
+Retention teams have limited resources
+Not all customers can be contacted
+The goal is to identify and prioritize the highest-risk subscriptions
+
+#Key Question:
+Which customers are most likely to churn, and why?
+
+# Dataset Description
+A fully synthetic but realistic SaaS dataset was used, designed to mirror real production systems.
+
+# Model Selection
+Baseline : Logistic Regression (for interpretability and validation)
+Final Model : XGBoost Classifier
+
+# Model Evaluation
+Due to class imbalance, accuracy was not the primary metric.
+
+# Metrics Used
+Recall – minimize missed churners
+ROC-AUC – ranking quality
+Precision@K & Lift@K – business prioritization
+
+# Final Performance
+Recall (churn): ~79%
+ROC-AUC: ~0.79
+Lift@10%: ~4.2×
+This means the model identifies churners over 4× better than random selection in the top-risk group.
+
+# Top-10% Risk Strategy (Business Logic)
+Instead of using a fixed probability threshold, customers are ranked by churn risk, and only the Top-10% highest-risk subscriptions are targeted.
+
+# Impact:
+Total subscriptions: 5,000
+Top-10% high-risk customers: 500
+Average MRR: ₹500
+Average churn probability (Top-10%): 0.70
+Retention success rate: 25%
+Estimated Impact
+Revenue at risk: ₹1.75 lakh / month
+Revenue saved: ₹43,750 / month
+Annual savings: ₹5+ lakh
+
+SHAP was used to: Explain individual churn predictions, Identify key churn drivers
+
+# Key churn drivers identified:
+Recent usage decline
+Days since last usage
+Support response delays
+Early subscription stage
+
+# Deployment
+The model was deployed as an interactive Streamlit application
+Live Demo: https://saaschurn.streamlit.app/
+
+# Tech Stack
+Python | Pandas | NumPy | Scikit-learn | XGBoost | SHAP | Streamlit | Git & Git LFS
+
+
+# Key Takeaways
+Churn prediction is about prioritization, not accuracy
+Temporal feature engineering is critical
+Explainability enables action, not just insight
+Top-K targeting aligns ML with business reality
+
+# Author
+Ahmed Shingare
+Aspiring Data Scientist | ML | Analytics
