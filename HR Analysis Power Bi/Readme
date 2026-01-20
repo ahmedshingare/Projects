@@ -1,1 +1,90 @@
 https://app.powerbi.com/view?r=eyJrIjoiYTMyZjFiYzUtYjc0My00MGZjLWJmMjUtMTA0MmI5NmIwZGY3IiwidCI6ImFiYzljNzFiLThiZDctNGRiZC04NmQ0LTA3ZTk3ZGNjZDg2NiJ9&pageName=188deb2204ba6e4946d9
+
+# HR Analytics Dashboard | Power BI
+
+# Project Summary
+This project is an interactive **HR Analytics Dashboard** built in **Power BI** to help HR teams and business leaders track workforce KPIs and make data-driven decisions.  
+It covers key HR areas like **Attrition, Headcount, Performance, Compensation, Training, Recruitment, Leave, and Engagement** using multiple report pages and slicer-based filters.
+
+# Business Problem
+HR teams often struggle with:
+- Monitoring **attrition trends** and employee movement
+- Tracking **performance and goal completion**
+- Understanding **salary/compensation patterns**
+- Measuring **training effectiveness**
+- Identifying **recruitment funnel efficiency**
+- Reviewing **leave trends** and employee engagement
+
+This dashboard solves the above by providing a **single reporting view** with interactive insights.
+
+# Key Features 
+Multi-page dashboard with clean navigation menu  
+Built using **Power Query + DAX + Data Modeling**  
+**Filter Panel / Slicers** for deep analysis:
+- Gender
+- Department
+- Job Title
+- Year
+- Education
+KPI cards + trend charts + breakdown visuals for decision-making  
+Designed for stakeholder reporting and demos
+
+# Dashboard Modules (Pages)
+1.  Home Page (Narrative Insights)
+2. Employee Overview  
+3. Performance Review  
+4. Compensation Analytics  
+5. Training Analytics  
+6. Leave Analytics  
+7. Recruitment Analytics  
+8. Employee Engagement  
+9. Headcount Summary  
+
+# KPIs & Insights Covered
+1. Employee Overview
+- Total Employees, Active Employees, Terminated Employees  
+- Attrition Rate %, Average Tenure, Average Age, Average Income  
+- Gender distribution and salary trends  
+
+2. Performance Review
+- Average Rating
+- Goal Met %
+- Best Performer % / Worst Performer %
+- Department-wise rating analysis
+
+3. Compensation Analytics
+- Salary hike %
+- Compensation ratio
+- Promotion %
+- Salary hike distribution by reasons
+
+4. Training Analytics
+- Training Completion %
+- Average Score
+- Duration Hours
+- Training Cost vs Effectiveness
+- Department-wise effectiveness comparison
+
+5. Recruitment Analytics
+- Candidates applied, hiring ratio, avg process time
+- Source effectiveness and accepted vs applied tracking
+
+6. Leave Analytics
+- Total leaves, approved leaves %, avg leaves per employee
+- Leave type analysis and performance vs leaves comparison
+
+7. Employee Engagement
+- Satisfaction score, attrition risk, work-life balance
+- Employees by attrition risk levels
+
+8. Headcount Summary
+- Net growth, total hires, department headcount trends
+- Hiring distribution by qualification/degree
+
+# Tools & Technologies Used
+- Power BI
+- DAX (KPI calculations & measures)
+- Power Query (data cleaning + transformation)
+- Excel / CSV dataset
+- Data Modeling (relationships)
+
